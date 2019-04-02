@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Insomnia } from "@ionic-native/insomnia/ngx";
 
 @Component({
   selector: 'app-home',
@@ -24,10 +25,13 @@ export class HomePage {
 
   overallTimer: any = false;
 
+  constructor(private insomnia: Insomnia) {}
+
   startTimer() {
 
     if (this.timer) {
       clearInterval(this.timer);
+      this.insomnia.keepAwake();
     }
 
     if (!this.overallTimer) {
@@ -88,6 +92,8 @@ export class HomePage {
       m: '00',
       s: '00'
     }
+
+    this.insomnia.allowSleepAgain();
   }
 
 }
